@@ -1,5 +1,9 @@
 const { DataTypes } = require("sequelize");
 
+/**
+ * Modelo de Tipo que representa la estructura de los tipos de Pokémon en la base de datos.
+ * @param {Object} sequelize - Instancia de Sequelize.
+ */
 module.exports = (sequelize) => {
   sequelize.define(
     "Type",

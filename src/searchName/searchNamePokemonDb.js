@@ -7,7 +7,6 @@ const { Op } = require("sequelize");
  * @returns {Promise<Array>} - Una lista de Pokémon que coincidan con el nombre dado, junto con sus tipos.
  * @throws {Error} - Lanza un error si la búsqueda en la base de datos falla.
  */
-
 const searchNamePokemonDb = async (name) => {
   try {
     const formattedName = name?.toLowerCase().trim();
@@ -23,7 +22,7 @@ const searchNamePokemonDb = async (name) => {
       },
     });
   } catch (error) {
-    throw new Error(`No se pudo buscar el pokemon ${name} en la base de datos`);
+    throw new Error(`No se pudo buscar el Pokémon ${name} en la base de datos`);
   }
 };
 

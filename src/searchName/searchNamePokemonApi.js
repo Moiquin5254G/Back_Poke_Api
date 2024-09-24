@@ -9,17 +9,14 @@ const cleanArrayApi = require("../utils/cleanArrayApi");
 const searchNamePokemonApi = async (name) => {
   if (!name || typeof name !== "string") {
     return {
-      error:
-        "El nombre del Pokémon es obligatorio y debe ser una cadena de texto",
+      error: "El nombre del Pokémon es obligatorio y debe ser una cadena de texto",
     };
   }
 
   const formattedName = name.toLowerCase().trim();
 
   try {
-    const response = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=800"
-    );
+    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=800");
     const pokemons = response.data.results;
 
     const matchingPokemon = pokemons.filter((pokemon) =>

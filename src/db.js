@@ -1,3 +1,21 @@
+/**
+ * @module db
+ * @description Configuración de la conexión a la base de datos utilizando Sequelize.
+ * Este módulo establece la conexión a una base de datos PostgreSQL y define modelos.
+ *
+ * Dependencias:
+ * - dotenv: para cargar variables de entorno.
+ * - sequelize: para interactuar con la base de datos.
+ * - fs: para trabajar con el sistema de archivos.
+ * - path: para manejar rutas de archivos.
+ *
+ * Modelos:
+ * - Se cargan todos los modelos definidos en el directorio /models y se establecen las relaciones entre ellos.
+ * 
+ * Relaciones:
+ * - Un Pokémon puede tener muchos tipos y un tipo puede pertenecer a muchos Pokémon, lo que se gestiona a través de una tabla intermedia llamada "PokemonType".
+ */
+
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
@@ -13,7 +31,6 @@ const sequelize = new Sequelize(
 );
 
 const basename = path.basename(__filename);
-
 const modelDefiners = [];
 
 fs.readdirSync(path.join(__dirname, "/models"))

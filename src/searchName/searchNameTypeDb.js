@@ -1,4 +1,4 @@
-const { Type, Pokemon } = require("../db.js");
+const { Type } = require("../db.js");
 const { Op } = require("sequelize");
 
 /**
@@ -7,7 +7,6 @@ const { Op } = require("sequelize");
  * @returns {Promise<Array>} - Una lista de tipos que coincidan con el nombre dado.
  * @throws {Error} - Lanza un error si la búsqueda en la base de datos falla.
  */
-
 const searchNameTypeDb = async (name) => {
   try {
     const formattedName = name?.toLowerCase().trim();
@@ -19,13 +18,11 @@ const searchNameTypeDb = async (name) => {
       attributes: ["id", "name"],
     });
 
-    return types.map((type) => {
-      return {
-        id: type.id,
-        name: type.name,
-        url: null,
-      };
-    });
+    return types.map((type) => ({
+      id: type.id,
+      name: type.name,
+      url: null,
+    }));
   } catch (error) {
     throw new Error(
       `No se pudo buscar el tipo ${name} en la base de datos: ${error.message}`

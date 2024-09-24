@@ -6,9 +6,10 @@ const searchNameTypeApi = require("../../../searchName/searchNameTypeApi");
  * @param {string} name - El nombre del tipo a buscar.
  * @returns {Promise<Array|Object>} - Un array con los tipos encontrados o un objeto con un mensaje de error.
  */
+
 const controllerGetTypeByName = async (name) => {
   if (!name) {
-    return { error: "El nombre del tipo es obligatorio" };
+    return { error: "El nombre del tipo es obligatorio." };
   }
 
   try {

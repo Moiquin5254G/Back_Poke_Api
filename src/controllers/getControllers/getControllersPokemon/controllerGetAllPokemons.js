@@ -1,10 +1,10 @@
 const { Pokemon, Type } = require("../../../db.js");
 const axios = require("axios");
-const cleanArrayApi = require("../../../utils/cleanArrayApi.js");
+const cleanArrayApi = require("../../../utils/cleanArrayApi");
 
 /**
  * Obtiene todos los Pokémon de la base de datos y de la PokeAPI.
- * @returns {Promise<Array>} - Array combinado de Pokémon desde la API y la base de datos.
+ * @returns {Promise<Array>} - Un array combinado de Pokémon desde la API y la base de datos.
  */
 
 const controllerGetAllPokemons = async () => {
@@ -30,7 +30,7 @@ const controllerGetAllPokemons = async () => {
 
     return [...databasePokemon, ...cleanedApiPokemons];
   } catch (error) {
-    return { error: "Hubo un problema al obtener los Pokémones." };
+    return { error: "Hubo un problema al obtener los Pokémon." };
   }
 };
 

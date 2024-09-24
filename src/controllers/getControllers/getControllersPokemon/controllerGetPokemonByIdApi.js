@@ -2,9 +2,9 @@ const axios = require("axios");
 const cleanArrayApi = require("../../../utils/cleanArrayApi");
 
 /**
- * Busca un pokemon por su ID en la PokeAPI.
- * @param {number} id El ID del pokemon a buscar.
- * @returns {Promise<Object>} El pokemon encontrado o un objeto de error.
+ * Busca un Pokémon por su ID en la PokeAPI.
+ * @param {number} id - El ID del Pokémon a buscar.
+ * @returns {Promise<Object>} - El Pokémon encontrado o un objeto de error.
  */
 
 const controllerGetPokemonByIdApi = async (id) => {
@@ -18,7 +18,7 @@ const controllerGetPokemonByIdApi = async (id) => {
 
     return cleanArrayApi([pokemonData])[0];
   } catch (error) {
-    return { error: `No se encontro el pokemon con el ID ${id}` };
+    return { error: `No se encontró el Pokémon con el ID ${id}.` };
   }
 };
 

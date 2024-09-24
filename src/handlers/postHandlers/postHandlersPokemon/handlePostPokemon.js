@@ -1,4 +1,4 @@
-const controllerPostPokemon = require("../../controllers/postControllers/postControllersPokemon/controllerPostPokemon");
+const controllerPostPokemon = require("../../../controllers/postControllers/postControllersPokemon/controllerPostPokemon");
 
 /**
  * Handler para la creación de un nuevo Pokémon.

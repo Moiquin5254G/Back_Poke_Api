@@ -7,7 +7,6 @@ const controllerGetPokemonByName = require("../../../controllers/getControllers/
  * @param {Object} res - El objeto de respuesta de Express.
  * @returns {void}
  */
-
 const handleGetPokemons = async (req, res) => {
   const { name } = req.query;
 

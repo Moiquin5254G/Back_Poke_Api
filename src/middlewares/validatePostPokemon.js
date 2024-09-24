@@ -1,3 +1,10 @@
+/**
+ * Middleware para validar los datos de un Pokémon antes de su creación.
+ * @param {Object} req - El objeto de solicitud de Express.
+ * @param {Object} res - El objeto de respuesta de Express.
+ * @param {Function} next - La función para pasar al siguiente middleware.
+ * @returns {void}
+ */
 const validatePostPokemon = (req, res, next) => {
   const { name, hp, attack, defense, speed, height, weight, types, image } =
     req.body;

@@ -10,7 +10,7 @@ const searchNamePokemonDb = require("../../../searchName/searchNamePokemonDb");
 const controllerGetPokemonByName = async (name) => {
   if (!name) {
     return {
-      error: "El nombre del pokemon es obligatorio",
+      error: "El nombre del Pokémon es obligatorio.",
     };
   }
 
@@ -25,7 +25,7 @@ const controllerGetPokemonByName = async (name) => {
 
     if (dbResults.length === 0 && apiResults.length === 0) {
       return {
-        error: `No se encontró el pokemon ${name} en la base de datos ni en la API.`,
+        error: `No se encontró el Pokémon ${name} en la base de datos ni en la API.`,
       };
     }
 

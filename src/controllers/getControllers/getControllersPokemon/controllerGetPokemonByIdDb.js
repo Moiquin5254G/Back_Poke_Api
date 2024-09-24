@@ -2,8 +2,8 @@ const { Pokemon, Type } = require("../../../db.js");
 
 /**
  * Busca un Pokémon por su ID en la base de datos.
- * @param {number} id El ID del pokemon a buscar.
- * @returns {Promise<Object>} El pokemon encontrado o un objeto de error.
+ * @param {number} id - El ID del Pokémon a buscar.
+ * @returns {Promise<Object>} - El Pokémon encontrado o un objeto de error.
  */
 
 const controllerGetPokemonByIdDb = async (id) => {
@@ -21,7 +21,7 @@ const controllerGetPokemonByIdDb = async (id) => {
     });
 
     if (!pokemon) {
-      throw new Error(`No se encontro el pokemon con el ID ${id}`);
+      throw new Error(`No se encontró el Pokémon con el ID ${id}.`);
     }
 
     return pokemon;

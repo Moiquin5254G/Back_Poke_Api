@@ -2,10 +2,9 @@ const axios = require("axios");
 
 /**
  * Busca un tipo por su nombre utilizando una búsqueda parcial y devuelve múltiples coincidencias.
- * @param {string} name El nombre del tipo a buscar.
- * @returns {Array|Object} Array con datos de tipo coincidentes o un objeto de error.
+ * @param {string} name - El nombre del tipo a buscar.
+ * @returns {Array|Object} - Array con datos de tipo coincidentes o un objeto de error.
  */
-
 const searchNameTypeApi = async (name) => {
   if (!name || typeof name !== "string") {
     return {

@@ -1,5 +1,5 @@
-const contollerGetTypeByIdDb = require("../../../controllers/getControllers/getControllersType/contollerGetTypeByIdDb");
-const contollerGetTypeByIdApi = require("../../../controllers/getControllers/getControllersType/contollerGetTypeByIdApi");
+const controllerGetTypeByIdDb = require("../../../controllers/getControllers/getControllersType/controllerGetTypeByIdDb");
+const controllerGetTypeByIdApi = require("../../../controllers/getControllers/getControllersType/controllerGetTypeByIdApi");
 
 /**
  * Handler para obtener un tipo por su ID. Busca en la base de datos y en la API.
@@ -11,16 +11,14 @@ const contollerGetTypeByIdApi = require("../../../controllers/getControllers/get
 const handleGetTypeById = async (req, res) => {
   const { id } = req.params;
 
-  if (isNaN(id) || id <= 0) {
-    return res
-      .status(400)
-      .json({ error: `El parámetro "id" debe ser un número positivo.` });
+  if (!id) {
+    return res.status(400).json({ error: `Debes pasar un ID.` });
   }
 
   try {
     const [typeDb, typeApi] = await Promise.all([
-      contollerGetTypeByIdDb(id),
-      contollerGetTypeByIdApi(id),
+      controllerGetTypeByIdDb(id),
+      controllerGetTypeByIdApi(id),
     ]);
 
     if (typeDb.error && typeApi.error) {

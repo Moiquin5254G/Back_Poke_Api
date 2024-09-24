@@ -14,7 +14,6 @@ const handleGetPokemonById = async (req, res) => {
     return res.status(400).json({ error: "Debes pasar un ID." });
   }
 
-  // Verificar si el ID es UUID o numérico
   const isUUID =
     /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
       id
@@ -25,7 +24,6 @@ const handleGetPokemonById = async (req, res) => {
     let pokemonDb = null;
     let pokemonApi = null;
 
-    // Si el ID es UUID, buscar solo en la base de datos
     if (isUUID) {
       pokemonDb = await controllerGetPokemonByIdDb(id);
       if (pokemonDb && !pokemonDb.error) {
@@ -37,7 +35,6 @@ const handleGetPokemonById = async (req, res) => {
       }
     }
 
-    // Si el ID es numérico, buscar solo en la PokeAPI
     if (isNumeric) {
       pokemonApi = await controllerGetPokemonByIdApi(id);
       if (pokemonApi && !pokemonApi.error) {
