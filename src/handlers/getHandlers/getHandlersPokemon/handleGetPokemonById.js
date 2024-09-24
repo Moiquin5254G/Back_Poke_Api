@@ -1,5 +1,5 @@
-const controllerGetPokemonByIdDb = require("../../controllers/getControllers/controllerGetPokemonByIdDb");
-const controllerGetPokemonByIdApi = require("../../controllers/getControllers/controllerGetPokemonByIdApi");
+const controllerGetPokemonByIdDb = require("../../../controllers/getControllers/getControllersPokemon/controllerGetPokemonByIdDb");
+const controllerGetPokemonByIdApi = require("../../../controllers/getControllers/getControllersPokemon/controllerGetPokemonByIdApi");
 
 /**
  * Handler para obtener un Pokémon por su ID. Busca en la base de datos o en la API.
@@ -31,11 +31,9 @@ const handleGetPokemonById = async (req, res) => {
       if (pokemonDb && !pokemonDb.error) {
         return res.status(200).json(pokemonDb);
       } else {
-        return res
-          .status(404)
-          .json({
-            error: `No se encontró el Pokémon con el ID ${id} en la base de datos.`,
-          });
+        return res.status(404).json({
+          error: `No se encontró el Pokémon con el ID ${id} en la base de datos.`,
+        });
       }
     }
 
@@ -45,11 +43,9 @@ const handleGetPokemonById = async (req, res) => {
       if (pokemonApi && !pokemonApi.error) {
         return res.status(200).json(pokemonApi);
       } else {
-        return res
-          .status(404)
-          .json({
-            error: `No se encontró el Pokémon con el ID ${id} en la API.`,
-          });
+        return res.status(404).json({
+          error: `No se encontró el Pokémon con el ID ${id} en la API.`,
+        });
       }
     }
 

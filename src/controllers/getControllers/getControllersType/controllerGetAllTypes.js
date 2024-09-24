@@ -1,4 +1,4 @@
-const { Type, Pokemon } = require("../../db.js");
+const { Type, Pokemon } = require("../../../db.js");
 const axios = require("axios");
 
 /**

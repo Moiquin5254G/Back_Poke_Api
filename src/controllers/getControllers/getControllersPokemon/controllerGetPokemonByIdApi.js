@@ -1,5 +1,5 @@
 const axios = require("axios");
-const cleanArrayApi = require("../../utils/cleanArrayApi");
+const cleanArrayApi = require("../../../utils/cleanArrayApi");
 
 /**
  * Busca un pokemon por su ID en la PokeAPI.

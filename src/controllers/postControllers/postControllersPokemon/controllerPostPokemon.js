@@ -1,5 +1,5 @@
-const { Pokemon, Type } = require("../../db");
-const controllerGetTypesFromApi = require("../../controllers/getControllers/controllerGetTypesFromApi"); // Ajusta la ruta
+const { Pokemon, Type } = require("../../../db");
+const controllerGetTypesFromApi = require("../../getControllers/getControllersType/controllerGetTypesFromApi");
 
 const controllerPostPokemon = async (
   name,

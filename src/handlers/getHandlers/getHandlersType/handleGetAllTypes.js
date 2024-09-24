@@ -1,5 +1,5 @@
-const controllerGetAllTypes = require("../../controllers/getControllers/controllerGetAllTypes");
-const controllerGetTypeByName = require("../../controllers/getControllers/controllerGetTypeByName");
+const controllerGetAllTypes = require("../../../controllers/getControllers/getControllersType/controllerGetAllTypes");
+const controllerGetTypeByName = require("../../../controllers/getControllers/getControllersType/controllerGetTypeByName");
 
 /**
  * Handler para obtener todos los tipos de los Pokemónes.
@@ -8,7 +8,7 @@ const controllerGetTypeByName = require("../../controllers/getControllers/contro
  * @returns {void}
  */
 
-const handleGetTypes = async (req, res) => {
+const handleGetAllTypes = async (req, res) => {
   const { name } = req.query;
 
   if (name && typeof name !== "string") {
@@ -29,4 +29,4 @@ const handleGetTypes = async (req, res) => {
   }
 };
 
-module.exports = handleGetTypes;
+module.exports = handleGetAllTypes;

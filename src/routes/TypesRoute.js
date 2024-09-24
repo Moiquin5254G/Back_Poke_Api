@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const handleGetAllTypes = require("../handlers/getHandlers/handleGetTypes");
-const handleGetTypeById = require("../handlers/getHandlers/handleGetTypeById");
+const handleGetAllTypes = require("../handlers/getHandlers/getHandlersType/handleGetAllTypes");
+const handleGetTypeById = require("../handlers/getHandlers/getHandlersType/handleGetTypeById");
 
 const typesRoute = Router();
 

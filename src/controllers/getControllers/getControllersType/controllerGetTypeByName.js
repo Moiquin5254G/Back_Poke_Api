@@ -1,5 +1,5 @@
-const searchNameTypeDb = require("../../searchName/searchNameTypeDb");
-const searchNameTypeApi = require("../../searchName/searchNameTypeApi");
+const searchNameTypeDb = require("../../../searchName/searchNameTypeDb");
+const searchNameTypeApi = require("../../../searchName/searchNameTypeApi");
 
 /**
  * Obtiene un tipo por nombre, buscando en la base de datos y la PokeAPI.

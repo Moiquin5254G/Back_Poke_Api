@@ -1,6 +1,6 @@
-const { Pokemon, Type } = require("../../db.js");
+const { Pokemon, Type } = require("../../../db.js");
 const axios = require("axios");
-const cleanArrayApi = require("../../utils/cleanArrayApi.js");
+const cleanArrayApi = require("../../../utils/cleanArrayApi.js");
 
 /**
  * Obtiene todos los Pokémon de la base de datos y de la PokeAPI.

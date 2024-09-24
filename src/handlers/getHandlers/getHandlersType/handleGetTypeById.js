@@ -1,5 +1,5 @@
-const contollerGetTypeByIdDb = require("../../controllers/getControllers/contollerGetTypeByIdDb");
-const contollerGetTypeByIdApi = require("../../controllers/getControllers/contollerGetTypeByIdApi");
+const contollerGetTypeByIdDb = require("../../../controllers/getControllers/getControllersType/contollerGetTypeByIdDb");
+const contollerGetTypeByIdApi = require("../../../controllers/getControllers/getControllersType/contollerGetTypeByIdApi");
 
 /**
  * Handler para obtener un tipo por su ID. Busca en la base de datos y en la API.

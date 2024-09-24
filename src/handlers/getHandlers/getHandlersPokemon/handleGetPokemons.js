@@ -1,5 +1,5 @@
-const controllerGetAllPokemons = require("../../controllers/getControllers/controllerGetAllPokemons");
-const controllerGetPokemonByName = require("../../controllers/getControllers/controllerGetPokemonByName");
+const controllerGetAllPokemons = require("../../../controllers/getControllers/getControllersPokemon/controllerGetAllPokemons");
+const controllerGetPokemonByName = require("../../../controllers/getControllers/getControllersPokemon/controllerGetPokemonByName");
 
 /**
  * Handler para obtener Pokémon. Puede buscar todos los Pokémon o uno específico por nombre.

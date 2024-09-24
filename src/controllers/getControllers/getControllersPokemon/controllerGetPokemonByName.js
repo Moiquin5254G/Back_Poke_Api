@@ -1,5 +1,5 @@
-const searchNamePokemonApi = require("../../searchName/searchNamePokemonApi");
-const searchNamePokemonDb = require("../../searchName/searchNamePokemonDb");
+const searchNamePokemonApi = require("../../../searchName/searchNamePokemonApi");
+const searchNamePokemonDb = require("../../../searchName/searchNamePokemonDb");
 
 /**
  * Obtiene un Pokémon por nombre, buscando en la base de datos y la PokeAPI.

@@ -1,4 +1,4 @@
-const { Pokemon, Type } = require("../../db.js");
+const { Pokemon, Type } = require("../../../db.js");
 
 /**
  * Busca un Pokémon por su ID en la base de datos.
