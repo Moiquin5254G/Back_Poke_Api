@@ -12,11 +12,8 @@ const controllerGetTypesFromApi = require("../../getControllers/getControllersTy
  * @param {number} weight - El peso del Pokémon.
  * @param {Array<string>} types - Un array de strings que representan los tipos del Pokémon.
  * @param {string} image - La imagen del Pokémon.
- * @returns {Promise<Object>} El Pokémon creado o un objeto de error.
- * @throws {Error} Lanza un error si la creación en la base de datos falla.
- * @throws {Error} Lanza un error si los tipos proporcionados no existen.
- * @throws {Error} Lanza un error si el Pokémon ya existe en la base de datos.
- * @throws {Error} Lanza un error si el nombre del Pokémon es obligatorio.
+ * @returns {Promise<Object>} El Pokémon creado con sus tipos relacionados o un objeto de error.
+ * @throws {Error} Lanza un error si los tipos proporcionados no existen, si el Pokémon ya existe o si la creación falla.
  */
 const controllerPostPokemon = async (
   name,
@@ -30,27 +27,35 @@ const controllerPostPokemon = async (
   image
 ) => {
   try {
+    // Formatea el nombre del Pokémon
     const formattedName = name?.toLowerCase().trim();
+    // Verifica si el Pokémon ya existe en la base de datos
     const exists = await Pokemon.findOne({ where: { name: formattedName } });
 
     if (exists) {
       throw new Error(`El Pokémon ${name} ya existe en la base de datos`);
     }
 
+    // Obtener los tipos válidos desde la API y la base de datos
     const validTypesFromApi = await controllerGetTypesFromApi();
     const validTypesFromDb = await Type.findAll({ attributes: ["name"] });
     const validTypes = [
       ...validTypesFromApi,
-      ...validTypesFromDb.map((type) => type.name),
+      ...validTypesFromDb.map((type) => type.name.toLowerCase()),
     ];
 
-    const invalidTypes = types.filter((type) => !validTypes.includes(type));
+    // Verificar si alguno de los tipos proporcionados no es válido
+    const invalidTypes = types
+      .map((type) => type.toLowerCase()) // Normaliza los tipos proporcionados
+      .filter((type) => !validTypes.includes(type));
+
     if (invalidTypes.length > 0) {
       throw new Error(
         `Uno o más tipos proporcionados no existen: ${invalidTypes.join(", ")}`
       );
     }
 
+    // Crear el nuevo Pokémon
     const newPokemon = await Pokemon.create({
       name: formattedName,
       hp,
@@ -62,10 +67,11 @@ const controllerPostPokemon = async (
       image,
     });
 
-    const pokemonTypes = await Type.findAll({ where: { name: types } });
-
+    // Asignar los tipos al nuevo Pokémon
+    const pokemonTypes = await Type.findAll({ where: { name: types.map(type => type.toLowerCase()) } });
     await newPokemon.addTypes(pokemonTypes);
 
+    // Devolver el Pokémon creado con sus tipos
     const pokemonWithTypes = await Pokemon.findByPk(newPokemon.id, {
       include: {
         model: Type,
