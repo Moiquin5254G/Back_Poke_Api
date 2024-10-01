@@ -27,16 +27,13 @@ const controllerPostPokemon = async (
   image
 ) => {
   try {
-    // Formatea el nombre del Pokémon
     const formattedName = name?.toLowerCase().trim();
-    // Verifica si el Pokémon ya existe en la base de datos
     const exists = await Pokemon.findOne({ where: { name: formattedName } });
 
     if (exists) {
       throw new Error(`El Pokémon ${name} ya existe en la base de datos`);
     }
 
-    // Obtener los tipos válidos desde la API y la base de datos
     const validTypesFromApi = await controllerGetTypesFromApi();
     const validTypesFromDb = await Type.findAll({ attributes: ["name"] });
     const validTypes = [
@@ -44,9 +41,8 @@ const controllerPostPokemon = async (
       ...validTypesFromDb.map((type) => type.name.toLowerCase()),
     ];
 
-    // Verificar si alguno de los tipos proporcionados no es válido
     const invalidTypes = types
-      .map((type) => type.toLowerCase()) // Normaliza los tipos proporcionados
+      .map((type) => type.toLowerCase())
       .filter((type) => !validTypes.includes(type));
 
     if (invalidTypes.length > 0) {
@@ -55,7 +51,6 @@ const controllerPostPokemon = async (
       );
     }
 
-    // Crear el nuevo Pokémon
     const newPokemon = await Pokemon.create({
       name: formattedName,
       hp,
@@ -67,11 +62,9 @@ const controllerPostPokemon = async (
       image,
     });
 
-    // Asignar los tipos al nuevo Pokémon
     const pokemonTypes = await Type.findAll({ where: { name: types.map(type => type.toLowerCase()) } });
     await newPokemon.addTypes(pokemonTypes);
 
-    // Devolver el Pokémon creado con sus tipos
     const pokemonWithTypes = await Pokemon.findByPk(newPokemon.id, {
       include: {
         model: Type,
