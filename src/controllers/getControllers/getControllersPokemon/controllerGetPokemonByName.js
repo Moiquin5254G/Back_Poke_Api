@@ -21,7 +21,7 @@ const controllerGetPokemonByName = async (name) => {
     ]);
 
     const dbResults = pokemonDb || [];
-    const apiResults = pokemonApi || [];
+    const apiResults = Array.isArray(pokemonApi) ? pokemonApi : [];
 
     if (dbResults.length === 0 && apiResults.length === 0) {
       return {
@@ -31,8 +31,10 @@ const controllerGetPokemonByName = async (name) => {
 
     return [...dbResults, ...apiResults];
   } catch (error) {
-    return { error: `Ocurrió un error al buscar el Pokémon: ${name}.` };
+    console.error("Error detallado en controllerGetPokemonByName:", error);
+    return { error: `Ocurrió un error al buscar el Pokémon: ${name}. Detalles: ${error.message}` };
   }
 };
+
 
 module.exports = controllerGetPokemonByName;
