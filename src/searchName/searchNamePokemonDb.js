@@ -11,8 +11,6 @@ const searchNamePokemonDb = async (name) => {
   try {
     const formattedName = name?.toLowerCase().trim();
 
-    console.log("Nombre formateado para búsqueda en DB:", formattedName);
-
     const results = await Pokemon.findAll({
       where: {
         name: { [Op.iLike]: `%${formattedName}%` },
@@ -24,14 +22,8 @@ const searchNamePokemonDb = async (name) => {
       },
     });
 
-    console.log(
-      `Resultados encontrados en DB para "${formattedName}":`,
-      results.length
-    );
-
     return results;
   } catch (error) {
-    console.error(`Error al buscar en la DB:`, error);
     throw new Error(`No se pudo buscar el Pokémon ${name} en la base de datos`);
   }
 };

@@ -31,10 +31,10 @@ const controllerGetPokemonByName = async (name) => {
 
     return [...dbResults, ...apiResults];
   } catch (error) {
-    console.error("Error detallado en controllerGetPokemonByName:", error);
-    return { error: `Ocurrió un error al buscar el Pokémon: ${name}. Detalles: ${error.message}` };
+    return {
+      error: `Ocurrió un error al buscar el Pokémon: ${name}. Detalles: ${error.message}`,
+    };
   }
 };
-
 
 module.exports = controllerGetPokemonByName;
