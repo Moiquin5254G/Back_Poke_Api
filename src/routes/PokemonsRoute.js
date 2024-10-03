@@ -3,6 +3,8 @@ const handleGetPokemons = require("../handlers/getHandlers/getHandlersPokemon/ha
 const handleGetPokemonById = require("../handlers/getHandlers/getHandlersPokemon/handleGetPokemonById");
 const handlePostPokemon = require("../handlers/postHandlers/postHandlersPokemon/handlePostPokemon");
 const validatePostPokemon = require("../middlewares/validatePostPokemon");
+const handlePutPokemon = require("../handlers/putHandlers/handlePutPokemon");
+const validateUpdatePokemon = require("../middlewares/validateUpdatePokemon");
 
 const pokemonsRoute = Router();
 
@@ -23,5 +25,11 @@ pokemonsRoute.get("/:id", handleGetPokemonById);
  * - POST /: Crea un nuevo Pokemon.
  */
 pokemonsRoute.post("/", validatePostPokemon, handlePostPokemon);
+
+/**
+ * Ruta para actualizar un Pokemon existente.
+ * - PUT /:id: Actualiza un Pokemon existente.
+ */
+pokemonsRoute.put("/:id", validateUpdatePokemon, handlePutPokemon);
 
 module.exports = pokemonsRoute;
