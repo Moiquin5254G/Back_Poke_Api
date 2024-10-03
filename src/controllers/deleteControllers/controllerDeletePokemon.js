@@ -1,4 +1,5 @@
 const { Pokemon } = require("../../db.js");
+const { validate: isUUID } = require("uuid");
 
 /**
  * Elimina un Pokemon de la base de datos.
@@ -7,19 +8,17 @@ const { Pokemon } = require("../../db.js");
  * @throws {Error} Lanza un error si no se encuentra el Pokemon en la base de datos o si la eliminacion falla.
  */
 const controllerDeletePokemon = async (id) => {
+  if (!id) {
+    return { error: "Debes pasar un ID." };
+  }
+
+  if (!isUUID(id)) {
+    return { error: "El ID debe ser un UUID." };
+  }
   try {
-    if (!id) {
-      return { error: "Debes pasar un ID." };
-    }
     const pokemon = await Pokemon.findByPk(id);
     if (!pokemon) {
       return { error: "El Pokemon no existe." };
-    }
-
-    if (pokemon.created === false) {
-      return {
-        error: "No se puede eliminar un Pokémon que proviene de la API.",
-      };
     }
 
     const pokemonName = pokemon.name;
