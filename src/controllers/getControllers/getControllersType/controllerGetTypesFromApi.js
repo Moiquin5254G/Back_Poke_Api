@@ -9,21 +9,17 @@ const { Type } = require("../../../db");
 const controllerGetTypesFromApi = async () => {
   try {
     const existingTypes = await Type.findAll();
-    console.log("Tipos existentes en la DB: ", existingTypes.map(t => t.name));
 
     if (existingTypes.length > 0) {
       return existingTypes.map((type) => type.name);
     }
 
     const response = await axios.get("https://pokeapi.co/api/v2/type");
-    console.log("Tipos obtenidos de la API: ", response.data.results);
 
     const typesFromApi = response.data.results.map((type) => ({
       name: type.name,
       url: type.url,
     }));
-
-    console.log("Tipos mapeados desde la API: ", typesFromApi);
 
     await Promise.all(
       typesFromApi.map((type) =>
@@ -35,11 +31,9 @@ const controllerGetTypesFromApi = async () => {
     );
 
     const types = typesFromApi.map((type) => type.name);
-    console.log("Tipos que se devolverán: ", types);
 
     return types;
   } catch (error) {
-    console.error("Error dentro de controllerGetTypesFromApi: ", error);
     throw new Error("No se pudieron obtener los tipos de la API.");
   }
 };

@@ -5,6 +5,7 @@ const handlePostPokemon = require("../handlers/postHandlers/postHandlersPokemon/
 const validatePostPokemon = require("../middlewares/validatePostPokemon");
 const handlePutPokemon = require("../handlers/putHandlers/handlePutPokemon");
 const validateUpdatePokemon = require("../middlewares/validateUpdatePokemon");
+const handleDeletePokemon = require("../handlers/deleteHandlers/handleDeletePokemon");
 
 const pokemonsRoute = Router();
 
@@ -31,5 +32,11 @@ pokemonsRoute.post("/", validatePostPokemon, handlePostPokemon);
  * - PUT /:id: Actualiza un Pokemon existente.
  */
 pokemonsRoute.put("/:id", validateUpdatePokemon, handlePutPokemon);
+
+/**
+ * Ruta para eliminar un Pokemon existente.
+ * - DELETE /:id: Elimina un Pokemon existente.
+ */
+pokemonsRoute.delete("/:id", handleDeletePokemon);
 
 module.exports = pokemonsRoute;
