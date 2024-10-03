@@ -1,4 +1,5 @@
 const { Type } = require("../../db.js");
+const { validate: isUUID } = require("uuid");
 
 /**
  * Elimina un tipo de la base de datos.
@@ -11,16 +12,14 @@ const controllerDeleteType = async (id) => {
   if (!id) {
     return { error: "Debes pasar un ID." };
   }
+
+  if (!isUUID(id)) {
+    return { error: "El ID debe ser un UUID." };
+  }
   try {
     const type = await Type.findByPk(id);
     if (!type) {
       return { error: "El tipo no existe." };
-    }
-
-    if (type.created === false) {
-      return {
-        error: "No se puede eliminar un tipo que proviene de la API.",
-      };
     }
 
     const typeName = type.name;
@@ -32,9 +31,9 @@ const controllerDeleteType = async (id) => {
     });
     return `Tipo "${typeName}" eliminado correctamente`;
   } catch (error) {
-    throw new Error({
+    return {
       error: "Hubo un problema al eliminar el tipo de la base de datos.",
-    });
+    };
   }
 };
 
