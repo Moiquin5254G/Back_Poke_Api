@@ -2,13 +2,19 @@ const { Type, Pokemon } = require("../../../db.js");
 const axios = require("axios");
 
 /**
- * Obtiene todos los tipos de los Pokémones de la API y la base de datos,
- * limpiando la información para que solo incluya el ID y el nombre.
- * @returns {Promise<Array>} Array de los tipos de los Pokémones de la API.
+ * Obtiene todos los tipos de los Pokémones de la base de datos.
+ * Si faltan tipos, los trae de la API para garantizar que siempre haya 20 tipos.
+ * @returns {Promise<Array>} Array de los tipos de los Pokémones.
  */
-
 const controllerGetAllTypes = async () => {
   try {
+    const apiResponse = await axios.get("https://pokeapi.co/api/v2/type");
+    const apiTypes = apiResponse.data.results.map((type, index) => ({
+      id: index + 1,
+      name: type.name,
+      url: type.url,
+    }));
+
     const dbTypes = await Type.findAll({
       attributes: ["id", "name", "url"],
       include: {
@@ -17,15 +23,14 @@ const controllerGetAllTypes = async () => {
         through: { attributes: [] },
       },
     });
-    const apiResponse = await axios.get("https://pokeapi.co/api/v2/type");
 
-    const apiTypes = apiResponse.data.results.map((type, index) => ({
-      id: index + 1,
-      name: type.name,
-      url: type.url,
-    }));
+    const dbTypeNames = new Set(dbTypes.map((type) => type.name));
 
-    return [...dbTypes, ...apiTypes];
+    const missingTypes = apiTypes.filter((type) => !dbTypeNames.has(type.name));
+
+    const allTypes = [...dbTypes, ...missingTypes];
+
+    return allTypes;
   } catch (error) {
     return { error: "Hubo un problema al obtener los tipos de Pokémon." };
   }
